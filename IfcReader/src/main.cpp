@@ -9,9 +9,9 @@ int main(int argc, char *argv[])
 {
 	std::wstring file_path;
 
-	if (argc != 4)
+	if (argc != 5)
 	{
-		std::wcout << "Usage: " << argv[0] << " IFC_PATH GEOMETRY_OUTPUT_FOLDER SQLITE_DB_PATH" << std::endl;
+		std::wcout << "Usage: " << argv[0] << " IFC_PATH GEOMETRY_OUTPUT_FOLDER SQLITE_DB_PATH MAX_SIZE_BYTES" << std::endl;
 		std::wcout << "\tIFC_PATH : Must exist." << std::endl;
 		std::wcout << "\tGEOMETRY_OUTPUT_FOLDER : Folder has to exist." << std::endl;
 		std::wcout << "\tSQLITE_DB_PATH : Will be created if it doesn't exist." << std::endl;
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	file_path.assign(argv1.begin(), argv1.end());
 
 	time_t time_start;
-	shared_ptr<IfcReader> ifc_reader(new IfcReader());
+	shared_ptr<IfcReader::IfcReader> ifc_reader(new IfcReader::IfcReader());
 	std::wcout << "Preparing to parse " << file_path << "." << std::endl;
 
 	time(&time_start);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	std::wcout << "Time to load model: " << difftime(time(NULL), time_start) << "s" << std::endl;
 
 	time(&time_start);
-	ifc_reader->handleGeometry(ifc_model, argv[2]);
+	ifc_reader->handleGeometry(ifc_model, argv[2], atoi(argv[4]));
 	std::wcout << "Time to handle geometry: " << difftime(time(NULL), time_start) << "s" << std::endl;
 
 	time(&time_start);

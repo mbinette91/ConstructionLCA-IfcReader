@@ -4,26 +4,31 @@
 *	`loadModelFromFile`:		Loads an IfcPPModel from the file_path passed as parameter.
 * Those functions will likely not change often.
 */
-#include <iostream>
-#include <ifcpp/reader/IfcPPReaderSTEP.h>
 #include "IfcReader.hpp"
 
-void IfcReader::handleMessageCallBack(void* obj_ptr, shared_ptr<StatusCallback::Message> m)
+#include <iostream>
+#include <ifcpp/reader/IfcPPReaderSTEP.h>
+#include <ifcpp/model/IfcPPModel.h>
+
+namespace IfcReader
 {
-	if (m && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_VALUE && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_TEXT)
+	void IfcReader::handleMessageCallBack(void* obj_ptr, shared_ptr<StatusCallback::Message> m)
 	{
-		// std::wcout << m->m_message_text << std::endl;
+		if (m && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_VALUE && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_TEXT)
+		{
+			// std::wcout << m->m_message_text << std::endl;
+		}
 	}
-}
 
-shared_ptr<IfcPPModel> IfcReader::loadModelFromFile(std::wstring file_path)
-{
-	shared_ptr<IfcPPModel> ifc_model(new IfcPPModel());
-	shared_ptr<IfcPPReaderSTEP> reader(new IfcPPReaderSTEP());
+	shared_ptr<IfcPPModel> IfcReader::loadModelFromFile(std::wstring file_path)
+	{
+		shared_ptr<IfcPPModel> ifc_model(new IfcPPModel());
+		shared_ptr<IfcPPReaderSTEP> reader(new IfcPPReaderSTEP());
 
-	reader->setMessageCallBack(this, &IfcReader::handleMessageCallBack);
+		reader->setMessageCallBack(this, &IfcReader::handleMessageCallBack);
 	
-	reader->loadModelFromFile(file_path, ifc_model);
+		reader->loadModelFromFile(file_path, ifc_model);
 
-	return ifc_model;
-}
+		return ifc_model;
+	}
+};

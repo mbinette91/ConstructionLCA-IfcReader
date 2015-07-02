@@ -171,6 +171,7 @@
   <ItemGroup>
     <ClCompile Include="src\IfcReader.Data.cpp" />
     <ClCompile Include="src\IfcReader.cpp" />
+    <ClCompile Include="src\IfcReader.Geometry.Builders.cpp" />
     <ClCompile Include="src\IfcReader.Geometry.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
