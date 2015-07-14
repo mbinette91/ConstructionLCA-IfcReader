@@ -4,6 +4,7 @@
 #include <ifcpp/model/shared_ptr.h>
 #include <ifcpp/model/StatusCallback.h>
 class IfcPPModel;
+class IfcProduct;
 
 namespace IfcReader
 {
@@ -22,6 +23,7 @@ namespace IfcReader
 	{
 	public:
 		std::ofstream* file;
+		std::stringstream* obj_ss;
 		std::stringstream* mesh_ss;
 		int count_obj;
 		int count_files;
@@ -36,7 +38,7 @@ namespace IfcReader
 		void closeCurrentMeshSheet();
 		void openNewMeshSheet();
 		bool hasActiveMeshSheet();
-		void startNewProduct();
+		void startNewProduct(shared_ptr<IfcProduct> product);
 		void addVertex(double x, double y, double z);
 		void closeCurrentProduct();
 	};

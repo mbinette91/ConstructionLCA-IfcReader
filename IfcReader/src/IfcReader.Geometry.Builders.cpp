@@ -4,6 +4,7 @@
 #include "IfcReader.hpp"
 
 #include <ifcpp/model/IfcPPModel.h>
+#include <ifcpp/IFC4/include/IfcProduct.h>
 #include <fstream>
 #include <sstream>
 
@@ -17,6 +18,7 @@ namespace IfcReader
 		, msb(NULL)
 	{
 		file = new std::ofstream;
+		obj_ss = new std::stringstream;
 		mesh_ss = new std::stringstream;
 		this->path = path.erase(path.find_last_not_of("/\\") + 1); // Remove trailing (back)slashes
 	}
@@ -24,6 +26,7 @@ namespace IfcReader
 	TreeFileBuilder::~TreeFileBuilder()
 	{
 		delete file;
+		delete obj_ss;
 		delete mesh_ss;
 	}
 
@@ -31,16 +34,11 @@ namespace IfcReader
 	{ // tree.json contains information about all the other pieces
 		file->open(path + "/" + filename);
 		*file << "{\"space\":{\"root\":{\"name\":\"default\",\"i\": [";
-		if (count_obj) {
-			*file << "{\"object\": 0,\"mtl\":0}";
-			for (int j = 1; j < count_obj; j++)
-				*file << ",{\"object\":" << j << ",\"mtl\":0}";
-		}
-		*file << "]},";
+		*file << obj_ss->str() << "]},";
 
 		*file << "\"meshes\":[" << mesh_ss->str() << "],";
 
-		*file << "\"materials\":[{\"name\":\"red\",\"diffuse\":{\"color\":[0.8,0.8,0.8]},\"specular\":{\"color\":[0.4,0.4,0.4]},\"phong\":64}],"
+		*file << "\"materials\":\"IFC\","
 			<< "\"lights\":["
 			<< "{\"color\":[0.5, 0.5, 0.5], \"dir\" : [-0.784465, -0.588348, -0.196116], \"type\" : 1}, "
 			<< "{ \"color\":[0.8, 0.8, 0.9], \"dir\" : [0.590796, 0.324938, -0.738495], \"type\" : 1 }, "
@@ -78,8 +76,13 @@ namespace IfcReader
 		return (msb != NULL);
 	}
 
-	void TreeFileBuilder::startNewProduct()
+	void TreeFileBuilder::startNewProduct(shared_ptr<IfcProduct> product)
 	{
+		if (count_obj > 0) { // No comma for the first obj!
+			*obj_ss << ",";
+		}
+		*obj_ss << "{\"object\":" << count_obj << ",\"class\":\"" << product->className() << "\"}";
+
 		if (!hasActiveMeshSheet())
 		{
 			openNewMeshSheet();
@@ -146,15 +149,7 @@ namespace IfcReader
 	{
 		*file << std::endl << "]," << std::endl;
 
-		//We should really compute those for real....
-		*file << "\"vertexNormals\": [";
-		if (count_vertex) {
-			*file << "1,1,1";
-			for (int j = 1; j < count_vertex; j++)
-				*file << ",1,1,1";
-		}
-		*file << "]," << std::endl;
-
+		// For now, let's not reuse the same vertex.
 		*file << std::endl << "\"indices\": [";
 		if (count_vertex) {
 			*file << "0";

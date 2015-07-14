@@ -35,7 +35,7 @@ namespace IfcReader
 			std::string	guid(wguid.begin(), wguid.end());
 			std::string	name(wname.begin(), wname.end());
 
-			tfb.startNewProduct();
+			tfb.startNewProduct(ifc_product);
 
 			// for each IfcProduct, there can be mulitple geometric representation items:
 			std::vector<shared_ptr<ItemShapeInputData> >& vec_item_data = shape_data->m_vec_item_data;
