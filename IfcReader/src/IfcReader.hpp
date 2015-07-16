@@ -8,6 +8,8 @@ class IfcProduct;
 
 namespace IfcReader
 {
+	std::string w2str(std::wstring str);
+
 	class IfcReader
 	{
 	public:
@@ -55,7 +57,7 @@ namespace IfcReader
 
 		MeshSheetBuilder(std::string path, std::string filename);
 		~MeshSheetBuilder();
-		void openNewMesh();
+		void openNewMesh(shared_ptr<IfcProduct> product);
 		void addVertex(double x, double y, double z);
 		void closeCurrentMesh();
 	};

@@ -12,6 +12,11 @@
 
 namespace IfcReader
 {
+	std::string w2str(std::wstring wstr)
+	{
+		return std::string(wstr.begin(), wstr.end());
+	}
+
 	void IfcReader::handleMessageCallBack(void* obj_ptr, shared_ptr<StatusCallback::Message> m)
 	{
 		if (m && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_VALUE && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_TEXT)

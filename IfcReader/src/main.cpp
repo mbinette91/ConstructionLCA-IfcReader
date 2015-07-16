@@ -9,9 +9,9 @@ int main(int argc, char *argv[])
 {
 	std::wstring file_path;
 
-	if (argc != 5)
+	if (argc != 6)
 	{
-		std::wcout << "Usage: " << argv[0] << " IFC_PATH GEOMETRY_OUTPUT_FOLDER SQLITE_DB_PATH MAX_SIZE_BYTES" << std::endl;
+		std::wcout << "Usage: " << argv[0] << " IFC_PATH GEOMETRY_OUTPUT_FOLDER SQLITE_DB_PATH MAX_SIZE_BYTES PROJECT_ID" << std::endl;
 		std::wcout << "\tIFC_PATH : Must exist." << std::endl;
 		std::wcout << "\tGEOMETRY_OUTPUT_FOLDER : Folder has to exist." << std::endl;
 		std::wcout << "\tSQLITE_DB_PATH : Will be created if it doesn't exist." << std::endl;
@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 
 	time_t time_start;
 	shared_ptr<IfcReader::IfcReader> ifc_reader(new IfcReader::IfcReader());
+	ifc_reader->project_id = atoi(argv[5]);
 	std::wcout << "Preparing to parse " << file_path << "." << std::endl;
 
 	time(&time_start);

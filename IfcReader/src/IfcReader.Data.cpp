@@ -36,11 +36,12 @@ namespace
 		std::string	name(wname.begin(), wname.end());
 		std::string	description(wdescription.begin(), wdescription.end());
 
-		SQLite::Statement   query(*dbc.db, "INSERT INTO products VALUES(NULL, ?, ?, ?, ?)");
+		SQLite::Statement   query(*dbc.db, "INSERT INTO products VALUES(NULL, ?, ?, ?, ?, ?)");
 		query.bind(1, dbc.ifc_reader->project_id);
 		query.bind(2, guid);
 		query.bind(3, name);
 		query.bind(4, description);
+		query.bind(5, ifc_product->className());
 
 		int nb = query.exec();
 		if (nb != 0 && nb != 1) // TO-DO: Not sure why valid INSERTs return 1 (SQLITE_ERROR)... ?!
@@ -69,7 +70,7 @@ namespace IfcReader
 			SQLite::Database db(sqlite_db_path, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
 			SQLite::Transaction transaction(db);
 
-			db.exec("CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY, project_id INTEGER, GUID TEXT, name TEXT, description TEXT)");
+			db.exec("CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY, project_id INTEGER, GUID TEXT, name TEXT, description TEXT, className TEXT)");
 
 			DatabaseConfig dbc(this, &db);
 			for (auto it = map_ifc_entities.begin(); it != map_ifc_entities.end(); ++it)

@@ -5,6 +5,7 @@
 
 #include <ifcpp/model/IfcPPModel.h>
 #include <ifcpp/IFC4/include/IfcProduct.h>
+#include <ifcpp/IFC4/include/IfcGloballyUniqueId.h>
 #include <fstream>
 #include <sstream>
 
@@ -56,7 +57,7 @@ namespace IfcReader
 		if (count_files > 1) { // No comma for the first file!
 			*mesh_ss << ",";
 		}
-		*mesh_ss << "{\"ref\": \"" << msb->filename << "\", \"length\": " << msb->count_obj << "}";
+		*mesh_ss << "{\"ref\": \"" << msb->filename << "\"}";
 
 		delete msb;
 		msb = NULL;
@@ -81,13 +82,13 @@ namespace IfcReader
 		if (count_obj > 0) { // No comma for the first obj!
 			*obj_ss << ",";
 		}
-		*obj_ss << "{\"object\":" << count_obj << ",\"class\":\"" << product->className() << "\"}";
+		*obj_ss << "{\"guid\": \"" << w2str(product->m_GlobalId->m_value) << "\"}";
 
 		if (!hasActiveMeshSheet())
 		{
 			openNewMeshSheet();
 		}
-		msb->openNewMesh();
+		msb->openNewMesh(product);
 	}
 
 	void TreeFileBuilder::addVertex(double x, double y, double z)
@@ -125,12 +126,13 @@ namespace IfcReader
 		delete file;
 	}
 
-	void MeshSheetBuilder::openNewMesh()
+	void MeshSheetBuilder::openNewMesh(shared_ptr<IfcProduct> product)
 	{
 		if (count_obj > 0) {
 			*file << "," << std::endl;
 		}
 		*file << "{" << std::endl
+			<< "\"guid\": \"" << w2str(product->m_GlobalId->m_value) << "\"," << std::endl
 			<< "\"vertexPositions\": [" << std::endl;
 		int countVertex = 0;
 		bool first_point = true;
