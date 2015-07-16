@@ -21,7 +21,7 @@ namespace IfcReader
 	{
 		if (m && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_VALUE && m->m_message_type != StatusCallback::MESSAGE_TYPE_PROGRESS_TEXT)
 		{
-			// std::wcout << m->m_message_text << std::endl;
+			//std::wcout << "Message: " << m->m_message_text << std::endl;
 		}
 	}
 
