@@ -34,18 +34,9 @@ namespace IfcReader
 	void TreeFileBuilder::writeTreeFile()
 	{ // tree.json contains information about all the other pieces
 		file->open(path + "/" + filename);
-		*file << "{\"space\":{\"root\":{\"name\":\"default\",\"i\": [";
-		*file << obj_ss->str() << "]},";
-
+		*file << "{\"objects\": [" << obj_ss->str() << "],";
 		*file << "\"meshes\":[" << mesh_ss->str() << "],";
-
-		*file << "\"materials\":\"IFC\","
-			<< "\"lights\":["
-			<< "{\"color\":[0.5, 0.5, 0.5], \"dir\" : [-0.784465, -0.588348, -0.196116], \"type\" : 1}, "
-			<< "{ \"color\":[0.8, 0.8, 0.9], \"dir\" : [0.590796, 0.324938, -0.738495], \"type\" : 1 }, "
-			<< "{ \"color\":[0.9, 0.9, 0.9], \"dir\" : [0.00999937, 0.00499969, 0.999938], \"type\" : 1 }],"
-			<< "\"view\" : {\"org\":[-2.39854, -2.18169, 1.21867], \"up\" : [-2.1648, -1.98588, 2.02927], \"target\" : [0, 0, 0], \"fov\" : 52.2338}}}";
-
+		*file << "\"materials\":\"IFC\" }";
 		file->close();
 	}
 
