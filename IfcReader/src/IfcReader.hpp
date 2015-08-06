@@ -5,10 +5,12 @@
 #include <ifcpp/model/StatusCallback.h>
 class IfcPPModel;
 class IfcProduct;
+class IfcValue;
 
 namespace IfcReader
 {
-	std::string w2str(std::wstring str);
+	std::string w2str(std::wstring str); // Defined in IfcReader.utils.cpp
+	std::wstring IfcValue2wstr(shared_ptr<IfcValue> ifc_value); // Defined in IfcReader.utils.cpp
 
 	class IfcReader
 	{

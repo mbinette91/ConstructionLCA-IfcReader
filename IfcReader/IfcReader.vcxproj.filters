@@ -27,9 +27,27 @@
     <ClCompile Include="src\IfcReader.Data.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\IfcReader.Geometry.Builders.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfcReader.Data.Handler.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfcReader.Data.Handler.SQLite.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IfcReader.utils.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\IfcReader.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IfcReader.Data.Handler.SQLite.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IfcReader.Data.Handler.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

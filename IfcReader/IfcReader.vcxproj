@@ -171,11 +171,16 @@
   <ItemGroup>
     <ClCompile Include="src\IfcReader.Data.cpp" />
     <ClCompile Include="src\IfcReader.cpp" />
+    <ClCompile Include="src\IfcReader.Data.Handler.SQLite.cpp" />
+    <ClCompile Include="src\IfcReader.Data.Handler.cpp" />
     <ClCompile Include="src\IfcReader.Geometry.Builders.cpp" />
     <ClCompile Include="src\IfcReader.Geometry.cpp" />
+    <ClCompile Include="src\IfcReader.utils.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\IfcReader.Data.Handler.hpp" />
+    <ClInclude Include="src\IfcReader.Data.Handler.SQLite.hpp" />
     <ClInclude Include="src\IfcReader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
