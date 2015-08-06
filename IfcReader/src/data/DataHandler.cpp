@@ -3,7 +3,7 @@
 * It is expected this is the module that is going to change the most often.
 */
 #include "IfcReader.hpp"
-#include "IfcReader.Data.Handler.hpp"
+#include "DataHandler.hpp"
 
 #include <ifcpp/model/IfcPPModel.h>
 #include <ifcpp/IFC4/include/IfcProduct.h>

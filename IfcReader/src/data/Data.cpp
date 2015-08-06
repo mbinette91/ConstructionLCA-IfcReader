@@ -7,7 +7,7 @@
 #include <iostream>
 #include <ifcpp/model/IfcPPModel.h>
 #include <ifcpp/IFC4/include/IfcProduct.h>
-#include "IfcReader.Data.Handler.SQLite.hpp"
+#include "SQLiteDataHandler.hpp"
 
 namespace IfcReader
 {

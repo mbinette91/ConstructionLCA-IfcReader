@@ -22,7 +22,7 @@
 #include <ifcpp/IFC4/include/IfcIdentifier.h>
 #include <ifcpp/IFC4/include/IfcNonNegativeLengthMeasure.h>
 #include <ifcpp/IFC4/include/IfcPropertySingleValue.h>
-#include "IfcReader.Data.Handler.SQLite.hpp"
+#include "SQLiteDataHandler.hpp"
 
 namespace IfcReader
 {
