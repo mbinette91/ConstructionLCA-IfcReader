@@ -169,18 +169,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\IfcReader.Data.cpp" />
+    <ClCompile Include="src\data\Data.cpp" />
     <ClCompile Include="src\IfcReader.cpp" />
-    <ClCompile Include="src\IfcReader.Data.Handler.SQLite.cpp" />
-    <ClCompile Include="src\IfcReader.Data.Handler.cpp" />
-    <ClCompile Include="src\IfcReader.Geometry.Builders.cpp" />
-    <ClCompile Include="src\IfcReader.Geometry.cpp" />
+    <ClCompile Include="src\data\SQLiteDataHandler.cpp" />
+    <ClCompile Include="src\data\DataHandler.cpp" />
+    <ClCompile Include="src\geometry\Geometry.Builders.cpp" />
+    <ClCompile Include="src\geometry\Geometry.cpp" />
     <ClCompile Include="src\IfcReader.utils.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\IfcReader.Data.Handler.hpp" />
-    <ClInclude Include="src\IfcReader.Data.Handler.SQLite.hpp" />
+    <ClInclude Include="src\data\DataHandler.hpp" />
+    <ClInclude Include="src\data\SQLiteDataHandler.hpp" />
     <ClInclude Include="src\IfcReader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
