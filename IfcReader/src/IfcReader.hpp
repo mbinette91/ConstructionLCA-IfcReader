@@ -25,7 +25,7 @@ namespace IfcReader
 	class MeshSheetBuilder;
 	class TreeFileBuilder
 	{
-	public:
+	private:
 		std::ofstream* file;
 		std::stringstream* obj_ss;
 		std::stringstream* mesh_ss;
@@ -36,6 +36,7 @@ namespace IfcReader
 		std::string path;
 		std::string filename;
 
+	public:
 		TreeFileBuilder(std::string path, std::string filename, long max_size_bytes);
 		~TreeFileBuilder();
 		void writeTreeFile();

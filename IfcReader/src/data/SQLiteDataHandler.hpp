@@ -19,11 +19,12 @@ namespace IfcReader
 {
 	class SQLiteDataHandler : public DataHandler
 	{
-	public:
+	private:
 		bool closed;
 		SQLite::Database *db;
 		SQLite::Transaction *transaction;
 
+	public:
 		SQLiteDataHandler(std::string path);
 		~SQLiteDataHandler();
 		void initialize();
